@@ -1,5 +1,7 @@
 package expo.modules.orcarfidreader
 
+import android.media.AudioManager
+import android.media.ToneGenerator
 import android.util.Log
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
@@ -59,9 +61,7 @@ class OrcaRfidReaderModule : Module() {
     // Pre-defined baud rates
     fun listBaudRates() = listOf(9600, 19200, 38400, 57600, 115200)
 
-    fun shouldPlayBeep(epc: String): Boolean {
-        return matchEPCs.isEmpty() || matchEPCs.contains(epc)
-    }
+    fun shouldPlayBeep(epc: String): Boolean = matchEPCs.isEmpty() || matchEPCs.contains(epc)
 
     fun playBeep() {
         toneGen.startTone(ToneGenerator.TONE_PROP_BEEP, 150)
