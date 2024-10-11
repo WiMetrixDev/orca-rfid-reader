@@ -5,13 +5,13 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import java.io.File
 
-class OrcaRFIDReaderModule : Module() {
+class OrcaRfidReaderModule : Module() {
     companion object {
-        private const val TAG = "OrcaRFIDReaderModule"
+        private const val TAG = "OrcaRfidReaderModule"
     }
 
     val serialPorts = mutableListOf<String>()
-    val readerHelper = ReaderHelper(this@OrcaRFIDReaderModule)
+    val readerHelper = ReaderHelper(this@OrcaRfidReaderModule)
 
     fun startReader(
         serialPort: String,

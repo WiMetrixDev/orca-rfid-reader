@@ -17,10 +17,10 @@ import com.payne.reader.process.ReaderImpl
 import com.payne.reader.util.ArrayUtils
 
 class ReaderHelper(
-    module: OrcaRFIDReaderModule,
+    module: OrcaRfidReaderModule,
 ) {
     companion object {
-        private const val TAG = "OrcaRFIDReaderModule"
+        private const val TAG = "OrcaRfidReaderModule"
         private const val MAX_POWER = 33
     }
 
@@ -100,7 +100,7 @@ class ReaderHelper(
                         Log.i(TAG, "Reading EPC: $epc, RSSI: $rssi")
                         mModule.sendEvent(
                             "onRFIDRead",
-                            mapOf("epc" to epc.replace(" ", ""), "rssi" to rssi)
+                            mapOf("epc" to epc.replace(" ", ""), "rssi" to rssi),
                         )
                     }.setOnFailure { failure ->
                         val cmdStr = Cmd.getNameForCmd(failure.cmd)

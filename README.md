@@ -4,8 +4,23 @@ UHF RFID reader module for ORCA-50 handheld device
 
 ## Installation
 
-To install just copy the `orca-rfid-reader` folder to `modules` directory of your Expo project.
-You will need to rebuild the project after adding the module.
+To install run:
+
+```bash
+pnpm add orca-rfid-reader
+```
+
+or
+
+```bash
+npm install orca-rfid-reader
+```
+
+or
+
+```bash
+yarn add orca-rfid-reader
+```
 
 ## Usage
 
