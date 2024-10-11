@@ -57,7 +57,7 @@ This won't receive any data until the reader is started.
 import { addRFIDReadListener } from "orca-rfid-reader";
 
 addRFIDReadListener(({ rssi, epc }) => {
-  console.log(rssi, epc);
+	console.log(rssi, epc);
 });
 ```
 

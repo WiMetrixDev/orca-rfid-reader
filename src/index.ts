@@ -17,43 +17,43 @@ export type TBaudRate = TBaudRates[number];
 export type TSerialPort = `/dev/tty${1 | 2 | 3 | 4}` | (string & {});
 
 export function startReader(
-  serialPort: TSerialPort,
-  baudRate: TBaudRate
+	serialPort: TSerialPort,
+	baudRate: TBaudRate
 ): boolean {
-  return OrcaRfidReaderModule.startReader(serialPort, baudRate);
+	return OrcaRfidReaderModule.startReader(serialPort, baudRate);
 }
 
 export function getReaderPower(): number {
-  return OrcaRfidReaderModule.getReaderPower();
+	return OrcaRfidReaderModule.getReaderPower();
 }
 
 export function setReaderPower(power: number): void {
-  OrcaRfidReaderModule.setReaderPower(power);
+	OrcaRfidReaderModule.setReaderPower(power);
 }
 
 export function listSerialPorts(): TSerialPort[] {
-  return OrcaRfidReaderModule.listSerialPorts();
+	return OrcaRfidReaderModule.listSerialPorts();
 }
 
 export function listBaudRates(): TBaudRates {
-  return OrcaRfidReaderModule.listBaudRates();
+	return OrcaRfidReaderModule.listBaudRates();
 }
 
 export function stopReader(): void {
-  OrcaRfidReaderModule.stopReader();
+	OrcaRfidReaderModule.stopReader();
 }
 
 const emitter = new EventEmitter(
-  OrcaRfidReaderModule ?? NativeModulesProxy.OrcaRFIDReader
+	OrcaRfidReaderModule ?? NativeModulesProxy.OrcaRFIDReader
 );
 
 export type RFIDReadEventPayload = {
-  epc: string;
-  rssi: string;
+	epc: string;
+	rssi: string;
 };
 
 export function addRFIDReadListener(
-  listener: (event: RFIDReadEventPayload) => void
+	listener: (event: RFIDReadEventPayload) => void
 ): Subscription {
-  return emitter.addListener<RFIDReadEventPayload>("onRFIDRead", listener);
+	return emitter.addListener<RFIDReadEventPayload>("onRFIDRead", listener);
 }
