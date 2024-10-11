@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "orca-rfid-reader": ["../src/index"],
+      "orca-rfid-reader/*": ["../src/*"]
+    }
+  }
+}
