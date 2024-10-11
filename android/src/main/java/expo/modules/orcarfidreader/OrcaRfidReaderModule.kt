@@ -67,6 +67,10 @@ class OrcaRfidReaderModule : Module() {
         toneGen.startTone(ToneGenerator.TONE_PROP_BEEP, 150)
     }
 
+    fun resetMatchEPCs() {
+        matchEPCs = ""
+    }
+
     fun stopReader() {
         Log.i(TAG, "Stopping UHF Reader")
         readerHelper.stopReader()
@@ -103,7 +107,7 @@ class OrcaRfidReaderModule : Module() {
             }
 
             Function("resetMatchEPCs") {
-                matchEPCs = ""
+                resetMatchEPCs()
             }
 
             Function("stopReader") {
