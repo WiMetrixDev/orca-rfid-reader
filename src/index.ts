@@ -1,26 +1,59 @@
-import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-// Import the native module. On web, it will be resolved to OrcaRfidReader.web.ts
-// and on native platforms to OrcaRfidReader.ts
-import OrcaRfidReaderModule from './OrcaRfidReaderModule';
-import OrcaRfidReaderView from './OrcaRfidReaderView';
-import { ChangeEventPayload, OrcaRfidReaderViewProps } from './OrcaRfidReader.types';
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 
-// Get the native constant value.
-export const PI = OrcaRfidReaderModule.PI;
+import type { Subscription } from "expo-modules-core";
+import { EventEmitter, NativeModulesProxy } from "expo-modules-core";
 
-export function hello(): string {
-  return OrcaRfidReaderModule.hello();
+import OrcaRfidReaderModule from "./OrcaRfidReaderModule";
+
+export const BAUD_RATES = [9600, 19200, 38400, 57600, 115200] as const;
+
+export type TBaudRates = typeof BAUD_RATES;
+export type TBaudRate = TBaudRates[number];
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type TSerialPort = `/dev/tty${1 | 2 | 3 | 4}` | (string & {});
+
+export function startReader(
+  serialPort: TSerialPort,
+  baudRate: TBaudRate
+): boolean {
+  return OrcaRfidReaderModule.startReader(serialPort, baudRate);
 }
 
-export async function setValueAsync(value: string) {
-  return await OrcaRfidReaderModule.setValueAsync(value);
+export function getReaderPower(): number {
+  return OrcaRfidReaderModule.getReaderPower();
 }
 
-const emitter = new EventEmitter(OrcaRfidReaderModule ?? NativeModulesProxy.OrcaRfidReader);
-
-export function addChangeListener(listener: (event: ChangeEventPayload) => void): Subscription {
-  return emitter.addListener<ChangeEventPayload>('onChange', listener);
+export function setReaderPower(power: number): void {
+  OrcaRfidReaderModule.setReaderPower(power);
 }
 
-export { OrcaRfidReaderView, OrcaRfidReaderViewProps, ChangeEventPayload };
+export function listSerialPorts(): TSerialPort[] {
+  return OrcaRfidReaderModule.listSerialPorts();
+}
+
+export function listBaudRates(): TBaudRates {
+  return OrcaRfidReaderModule.listBaudRates();
+}
+
+export function stopReader(): void {
+  OrcaRfidReaderModule.stopReader();
+}
+
+const emitter = new EventEmitter(
+  OrcaRfidReaderModule ?? NativeModulesProxy.OrcaRFIDReader
+);
+
+export type RFIDReadEventPayload = {
+  epc: string;
+  rssi: string;
+};
+
+export function addRFIDReadListener(
+  listener: (event: RFIDReadEventPayload) => void
+): Subscription {
+  return emitter.addListener<RFIDReadEventPayload>("onRFIDRead", listener);
+}
