@@ -100,6 +100,31 @@ import { listBaudRates } from "orca-rfid-reader";
 const baudRates = listBaudRates();
 ```
 
+### `setMatchEPCs`
+
+This sets the EPCs to match against when reading tags. The EPCs should a
+string composed of EPCs separated by commas.
+
+```typescript
+import { setMatchEPCs } from "orca-rfid-reader";
+
+setMatchEPCs("E28011606000000000000000,E28011606000000000000001");
+```
+
+Based on the value of the matching criteria, the reader will beep when the tag is read.
+
+### `resetMatchEPCs`
+
+This resets the EPCs to match against when reading tags.
+
+```typescript
+import { resetMatchEPCs } from "orca-rfid-reader";
+
+resetMatchEPCs();
+```
+
+We want this because when no EPCs are set, the reader will beep when any tag is read.
+
 ### `stopReader`
 
 This disconnects the UHF RFID reader and stops scanning. This should be called when the reader is

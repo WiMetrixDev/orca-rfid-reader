@@ -95,13 +95,17 @@ class ReaderHelper(
                     .setInventory(mInventoryParam.inventory)
                     .setOnInventoryTagSuccess { inventoryTag ->
                         Log.i(TAG, "Inventory Tag Success")
-                        val epc = inventoryTag.epc
+                        val epc = inventoryTag.epc.replace(" ", "")
                         val rssi = inventoryTag.rssi
                         Log.i(TAG, "Reading EPC: $epc, RSSI: $rssi")
                         mModule.sendEvent(
                             "onRFIDRead",
-                            mapOf("epc" to epc.replace(" ", ""), "rssi" to rssi),
+                            mapOf("epc" to epc, "rssi" to rssi),
                         )
+
+                        if (mModule.shouldPlayBeep(epc)) {
+                            mModule.playBeep()
+                        }
                     }.setOnFailure { failure ->
                         val cmdStr = Cmd.getNameForCmd(failure.cmd)
                         val resultCodeStr = ResultCode.getNameForResultCode(failure.errorCode)

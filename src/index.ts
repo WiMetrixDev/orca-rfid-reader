@@ -39,6 +39,14 @@ export function listBaudRates(): TBaudRates {
 	return OrcaRfidReaderModule.listBaudRates();
 }
 
+export function setMatchEPCs(newMatchEPCs: string): void {
+	OrcaRfidReaderModule.setMatchEPCs(newMatchEPCs);
+}
+
+export function resetMatchEPCs(): void {
+	OrcaRfidReaderModule.resetMatchEPCs();
+}
+
 export function stopReader(): void {
 	OrcaRfidReaderModule.stopReader();
 }

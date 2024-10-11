@@ -10,8 +10,11 @@ class OrcaRfidReaderModule : Module() {
         private const val TAG = "OrcaRfidReaderModule"
     }
 
+    private val toneGen = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
+
     val serialPorts = mutableListOf<String>()
     val readerHelper = ReaderHelper(this@OrcaRfidReaderModule)
+    var matchEPCs = ""
 
     fun startReader(
         serialPort: String,
@@ -56,6 +59,14 @@ class OrcaRfidReaderModule : Module() {
     // Pre-defined baud rates
     fun listBaudRates() = listOf(9600, 19200, 38400, 57600, 115200)
 
+    fun shouldPlayBeep(epc: String): Boolean {
+        return matchEPCs.isEmpty() || matchEPCs.contains(epc)
+    }
+
+    fun playBeep() {
+        toneGen.startTone(ToneGenerator.TONE_PROP_BEEP, 150)
+    }
+
     fun stopReader() {
         Log.i(TAG, "Stopping UHF Reader")
         readerHelper.stopReader()
@@ -85,6 +96,14 @@ class OrcaRfidReaderModule : Module() {
 
             Function("listBaudRates") {
                 listBaudRates()
+            }
+
+            Function("setMatchEPCs") { newMatchEPCs: String ->
+                matchEPCs = newMatchEPCs
+            }
+
+            Function("resetMatchEPCs") {
+                matchEPCs = ""
             }
 
             Function("stopReader") {
