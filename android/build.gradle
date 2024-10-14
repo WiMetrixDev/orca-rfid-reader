@@ -14,41 +14,40 @@ useExpoPublishing()
 // Most of the time, you may like to manage the Android SDK versions yourself.
 def useManagedAndroidSdkVersions = false
 if (useManagedAndroidSdkVersions) {
-  useDefaultAndroidSdkVersions()
+	useDefaultAndroidSdkVersions()
 } else {
-  buildscript {
-    // Simple helper that allows the root project to override versions declared by this library.
-    ext.safeExtGet = { prop, fallback ->
-      rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-    }
-  }
-  project.android {
-    compileSdkVersion safeExtGet("compileSdkVersion", 34)
-    defaultConfig {
-      minSdkVersion safeExtGet("minSdkVersion", 21)
-      targetSdkVersion safeExtGet("targetSdkVersion", 34)
-    }
-  }
+	buildscript {
+		// Simple helper that allows the root project to override versions declared by this library.
+		ext.safeExtGet = { prop, fallback ->
+			rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+		}
+	}
+	project.android {
+		compileSdkVersion safeExtGet("compileSdkVersion", 34)
+		defaultConfig {
+			minSdkVersion safeExtGet("minSdkVersion", 21)
+			targetSdkVersion safeExtGet("targetSdkVersion", 34)
+		}
+	}
 }
 
 android {
-  namespace "expo.modules.orcarfidreader"
-  defaultConfig {
-    versionCode 1
-    versionName "0.0.1"
-  }
-  lintOptions {
-    abortOnError false
-  }
-  sourceSets {
-    main {
-      jniLibs.srcDirs = ['libs']
-    }
-  }
+	namespace "expo.modules.orcarfidreader"
+	defaultConfig {
+		versionCode 1
+		versionName "0.0.1"
+	}
+	lintOptions {
+		abortOnError false
+	}
+}
+
+repositories {
+	flatDir {
+		dirs 'libs'
+	}
 }
 
 dependencies {
-  implementation (files("libs/lib_connect.jar"))
-  implementation (files("libs/lib_reader.jar"))
-  implementation (files("libs/SerialPort.jar"))
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
