@@ -52,7 +52,7 @@ export function stopReader(): void {
 }
 
 const emitter = new EventEmitter(
-	OrcaRfidReaderModule ?? NativeModulesProxy.OrcaRFIDReader
+	OrcaRfidReaderModule ?? NativeModulesProxy.OrcaRfidReader
 );
 
 export type RFIDReadEventPayload = {

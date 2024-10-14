@@ -78,7 +78,7 @@ class OrcaRfidReaderModule : Module() {
 
     override fun definition() =
         ModuleDefinition {
-            Name("OrcaRFIDReader")
+            Name("OrcaRfidReader")
 
             Events("onRFIDRead")
 
