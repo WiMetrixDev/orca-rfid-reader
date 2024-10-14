@@ -40,14 +40,15 @@ android {
   lintOptions {
     abortOnError false
   }
-}
-
-repositories {
-	flatDir {
-		dirs 'libs'
-	}
+  sourceSets {
+    main {
+      jniLibs.srcDirs = ['libs']
+    }
+  }
 }
 
 dependencies {
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation (files("libs/lib_connect.jar"))
+  implementation (files("libs/lib_reader.jar"))
+  implementation (files("libs/SerialPort.jar"))
 }
