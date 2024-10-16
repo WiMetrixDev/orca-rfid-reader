@@ -1,6 +1,6 @@
 {
 	"name": "orca-rfid-reader",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "UHF RFID reader expo module for ORCA-50 handheld device",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",

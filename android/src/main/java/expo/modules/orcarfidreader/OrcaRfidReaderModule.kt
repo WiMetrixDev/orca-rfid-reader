@@ -16,6 +16,7 @@ class OrcaRfidReaderModule : Module() {
 
     val serialPorts = mutableListOf<String>()
     val readerHelper = ReaderHelper(this@OrcaRfidReaderModule)
+    var isBeepEnabled = true
     var matchEPCs = ""
 
     fun startReader(
@@ -61,7 +62,9 @@ class OrcaRfidReaderModule : Module() {
     // Pre-defined baud rates
     fun listBaudRates() = listOf(9600, 19200, 38400, 57600, 115200)
 
-    fun shouldPlayBeep(epc: String): Boolean = matchEPCs.isEmpty() || matchEPCs.contains(epc)
+    fun shouldPlayBeep(epc: String): Boolean {
+        return isBeepEnabled && matchEPCs.isEmpty() || matchEPCs.contains(epc)
+    }
 
     fun playBeep() {
         toneGen.startTone(ToneGenerator.TONE_PROP_BEEP, 150)
@@ -100,6 +103,18 @@ class OrcaRfidReaderModule : Module() {
 
             Function("listBaudRates") {
                 listBaudRates()
+            }
+
+            Function("enableBeep") {
+                isBeepEnabled = true
+            }
+
+            Function("disableBeep") {
+                isBeepEnabled = false
+            }
+
+            Function("getBeepStatus") {
+                isBeepEnabled
             }
 
             Function("setMatchEPCs") { newMatchEPCs: String ->

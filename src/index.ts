@@ -39,6 +39,18 @@ export function listBaudRates(): TBaudRates {
 	return OrcaRfidReaderModule.listBaudRates();
 }
 
+export function enableBeep(): void {
+	OrcaRfidReaderModule.enableBeep();
+}
+
+export function disableBeep(): void {
+	OrcaRfidReaderModule.disableBeep();
+}
+
+export function getBeepStatus(): boolean {
+	return OrcaRfidReaderModule.getBeepStatus();
+}
+
 export function setMatchEPCs(newMatchEPCs: string): void {
 	OrcaRfidReaderModule.setMatchEPCs(newMatchEPCs);
 }

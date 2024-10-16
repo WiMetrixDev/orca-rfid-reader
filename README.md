@@ -100,6 +100,36 @@ import { listBaudRates } from "orca-rfid-reader";
 const baudRates = listBaudRates();
 ```
 
+### `enableBeep`
+
+This enables the beep sound when a tag is read.
+
+```typescript
+import { enableBeep } from "orca-rfid-reader";
+
+enableBeep();
+```
+
+### `disableBeep`
+
+This disables the beep sound when a tag is read.
+
+```typescript
+import { disableBeep } from "orca-rfid-reader";
+
+disableBeep();
+```
+
+### `getBeepStatus`
+
+This returns the current status of the beep sound when a tag is read.
+
+```typescript
+import { getBeepStatus } from "orca-rfid-reader";
+
+const isBeepEnabled = getBeepStatus();
+```
+
 ### `setMatchEPCs`
 
 This sets the EPCs to match against when reading tags. The EPCs should a
