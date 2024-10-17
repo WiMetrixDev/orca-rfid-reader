@@ -62,9 +62,7 @@ class OrcaRfidReaderModule : Module() {
     // Pre-defined baud rates
     fun listBaudRates() = listOf(9600, 19200, 38400, 57600, 115200)
 
-    fun shouldPlayBeep(epc: String): Boolean {
-        return isBeepEnabled && matchEPCs.isEmpty() || matchEPCs.contains(epc)
-    }
+    fun shouldPlayBeep(epc: String): Boolean = isBeepEnabled && matchEPCs.isEmpty() || matchEPCs.contains(epc)
 
     fun playBeep() {
         toneGen.startTone(ToneGenerator.TONE_PROP_BEEP, 150)
@@ -106,11 +104,11 @@ class OrcaRfidReaderModule : Module() {
             }
 
             Function("enableBeep") {
-                isBeepEnabled = true
+                setIsBeepEnabled(true)
             }
 
             Function("disableBeep") {
-                isBeepEnabled = false
+                setIsBeepEnabled(false)
             }
 
             Function("getBeepStatus") {
