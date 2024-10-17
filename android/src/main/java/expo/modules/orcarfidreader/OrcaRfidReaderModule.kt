@@ -72,6 +72,10 @@ class OrcaRfidReaderModule : Module() {
         matchEPCs = ""
     }
 
+    fun setIsBeepEnabled(enabled: Boolean) {
+        isBeepEnabled = enabled
+    }
+
     fun stopReader() {
         Log.i(TAG, "Stopping UHF Reader")
         readerHelper.stopReader()
