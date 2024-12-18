@@ -37,9 +37,9 @@ It accepts two arguments:
    the values returned by `listBaudRates`.
 
 ```typescript
-import { startReader } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-const isConnected = await startReader("uhf", "/dev/ttyS4", 115200);
+const isConnected = OrcaRfidReader.startReader("uhf", "/dev/ttyS4", 115200);
 ```
 
 ### `getReaderPower`
@@ -47,9 +47,9 @@ const isConnected = await startReader("uhf", "/dev/ttyS4", 115200);
 This returns the current power of the UHF RFID reader. This value is normalized to a range of 0-100.
 
 ```typescript
-import { getReaderPower } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-const power = getReaderPower();
+const power = OrcaRfidReader.getReaderPower();
 ```
 
 ### `setReaderPower`
@@ -57,9 +57,9 @@ const power = getReaderPower();
 This sets the power of the UHF RFID reader. The value should be in the range of 0-100.
 
 ```typescript
-import { setReaderPower } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-setReaderPower(50);
+OrcaRfidReader.setReaderPower(50);
 ```
 
 ### `addRFIDReadListener`
@@ -69,9 +69,9 @@ This adds a listener to the UHF RFID reader. The listener is called whenever a t
 This won't receive any data until the reader is started.
 
 ```typescript
-import { addRFIDReadListener } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-addRFIDReadListener(({ rssi, epc }) => {
+OrcaRfidReader.addRFIDReadListener(({ rssi, epc }) => {
 	console.log(rssi, epc);
 });
 ```
@@ -84,9 +84,9 @@ This returns a list of available serial ports on the device (the options that ca
 `startReader`).
 
 ```typescript
-import { listSerialPorts } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-const ports = await listSerialPorts();
+const ports = OrcaRfidReader.listSerialPorts();
 ```
 
 ### `listBaudRates`
@@ -95,9 +95,9 @@ This returns a list of available baud rates that can be passed to `startReader`.
 rates are hardcoded to the following values: `[9600, 19200, 38400, 57600, 115200]`.
 
 ```typescript
-import { listBaudRates } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-const baudRates = listBaudRates();
+const baudRates = OrcaRfidReader.listBaudRates();
 ```
 
 ### `enableBeep`
@@ -105,9 +105,9 @@ const baudRates = listBaudRates();
 This enables the beep sound when a tag is read.
 
 ```typescript
-import { enableBeep } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-enableBeep();
+OrcaRfidReader.enableBeep();
 ```
 
 ### `disableBeep`
@@ -115,9 +115,9 @@ enableBeep();
 This disables the beep sound when a tag is read.
 
 ```typescript
-import { disableBeep } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-disableBeep();
+OrcaRfidReader.disableBeep();
 ```
 
 ### `getBeepStatus`
@@ -125,9 +125,9 @@ disableBeep();
 This returns the current status of the beep sound when a tag is read.
 
 ```typescript
-import { getBeepStatus } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-const isBeepEnabled = getBeepStatus();
+const isBeepEnabled = OrcaRfidReader.getBeepStatus();
 ```
 
 ### `setMatchEPCs`
@@ -136,9 +136,11 @@ This sets the EPCs to match against when reading tags. The EPCs should a
 string composed of EPCs separated by commas.
 
 ```typescript
-import { setMatchEPCs } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-setMatchEPCs("E28011606000000000000000,E28011606000000000000001");
+OrcaRfidReader.setMatchEPCs(
+	"E28011606000000000000000,E28011606000000000000001"
+);
 ```
 
 Based on the value of the matching criteria, the reader will beep when the tag is read.
@@ -148,9 +150,9 @@ Based on the value of the matching criteria, the reader will beep when the tag i
 This resets the EPCs to match against when reading tags.
 
 ```typescript
-import { resetMatchEPCs } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-resetMatchEPCs();
+OrcaRfidReader.resetMatchEPCs();
 ```
 
 We want this because when no EPCs are set, the reader will beep when any tag is read.
@@ -161,7 +163,7 @@ This disconnects the UHF RFID reader and stops scanning. This should be called w
 no longer needed to free up resources and prevent battery drain.
 
 ```typescript
-import { stopReader } from "orca-rfid-reader";
+import OrcaRfidReader from "orca-rfid-reader";
 
-stopReader();
+OrcaRfidReader.stopReader();
 ```
