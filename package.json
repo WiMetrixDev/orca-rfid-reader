@@ -1,5 +1,5 @@
 {
-	"name": "orca-rfid-reader",
+	"name": "@wimetrix/orca-rfid-reader",
 	"version": "1.0.0",
 	"description": "UHF RFID reader expo module for ORCA-50 handheld device",
 	"main": "build/index.js",
@@ -21,13 +21,7 @@
 		"orca-rfid-reader",
 		"OrcaRfidReader"
 	],
-	"repository": "https://github.com/WiMetrixDev/orca-rfid-reader",
-	"bugs": {
-		"url": "https://github.com/WiMetrixDev/orca-rfid-reader/issues"
-	},
-	"author": "mbm_1607 <muhammadkhan1607@gmail.com> (https://github.com/MBM1607)",
 	"license": "MIT",
-	"homepage": "https://github.com/WiMetrixDev/orca-rfid-reader#readme",
 	"dependencies": {},
 	"devDependencies": {
 		"@types/react": "~18.3.12",
@@ -39,6 +33,10 @@
 		"expo": "*",
 		"react": "*",
 		"react-native": "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/WiMetrixDev/orca-rfid-reader"
 	},
 	"packageManager": "yarn@4.5.0"
 }
